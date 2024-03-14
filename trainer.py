@@ -118,8 +118,9 @@ def training(lossl=None):
       display.clear_output(wait=True)
       display.display(pl.gcf())
     
-  torch.save(m.state_dict(), f"model{steps}.pt")
+  torch.save(m.state_dict(), f"modelfinal.pt")
   return lossl
 losses=[]
 m.to(device)
 losses=training(lossl=losses)
+estimate_loss(hyperparameters["batch"],hyperparameters["block"],hyperparameters["eval_iters"],m)

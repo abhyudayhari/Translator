@@ -16,7 +16,7 @@ for option in options:
     hyperparameters[option] = eval(value)
 numofexamples=hyperparameters["numofexamples"]
 
-def encode(text,type="input"):
+def encode(text,inputmerges,outputmerges,type="input",):
    # given a string, return list of integers (the tokens)
   tokens = list(text.encode("utf-8"))
   if type=='input':
@@ -141,17 +141,17 @@ if __name__=="__main__":
         for r in range(len(inp)):
             # print(r)
             # print(len(encode(inp[r])))
-            if len(encode(inp[r],type='input'))<=hyperparameters['maxlen'] and len(encode(out[r],type='output'))<=hyperparameters['maxlen']:
+            if len(encode(text=inp[r],type='input',inputmerges=inputmerges,outputmerges=outputmerges))<=hyperparameters['maxlen'] and len(encode(text=out[r],type='output',inputmerges=inputmerges,outputmerges=outputmerges))<=hyperparameters['maxlen']:
                 inp1+=[inp[r]]
                 out1+=[out[r]]
         data+=[inp1,out1]
     print("Trimming completed")
     traininput1,trainoutput1,valinput1,valoutput1=data
     print("Encoding.......")
-    totraininput=[[1003]+encode(i,type='input')+[1001]*(hyperparameters['maxlen']-len(encode(i,type='input')))+[1002] for i in traininput1]
-    totrainoutput=[[1003]+encode(i,type='output')+[1001]*(hyperparameters['maxlen']-len(encode(i,type='output')))+[1002] for i in trainoutput1]
-    tovalinput=[[1003]+encode(i,type='input')+[1001]*(hyperparameters['maxlen']-len(encode(i,type='input')))+[1002] for i in valinput1]
-    tovaloutput=[[1003]+encode(i,type='output')+[1001]*(hyperparameters['maxlen']-len(encode(i,type='output')))+[1002] for i in valoutput1]
+    totraininput=[[1003]+encode(text=i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)+[1001]*(hyperparameters['maxlen']-len(encode(text=i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)))+[1002] for i in traininput1]
+    totrainoutput=[[1003]+encode(text=i,type='output',inputmerges=inputmerges,outputmerges=outputmerges)+[1001]*(hyperparameters['maxlen']-len(encode(text=i,type='output',inputmerges=inputmerges,outputmerges=outputmerges)))+[1002] for i in trainoutput1]
+    tovalinput=[[1003]+encode(text=i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)+[1001]*(hyperparameters['maxlen']-len(encode(text=i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)))+[1002] for i in valinput1]
+    tovaloutput=[[1003]+encode(text=i,type='output',inputmerges=inputmerges,outputmerges=outputmerges)+[1001]*(hyperparameters['maxlen']-len(encode(text=i,type='output',inputmerges=inputmerges,outputmerges=outputmerges)))+[1002] for i in valoutput1]
     a=[totraininput,totrainoutput,tovalinput,tovaloutput]
     print("Encoding completed,dumping.....")
     file=open("tokenized.dat","wb")

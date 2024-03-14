@@ -176,9 +176,9 @@ class Model(nn.Module):
     else:
       loss=f.cross_entropy(logits.reshape(b*t,-1),decout.reshape(-1))
     return loss,logits
-  def generate(self,i):
+  def generate(self,i,inputmerges,outputmerges):
     ix=torch.ones((1,1),dtype=torch.long,device=self.device)*1003
-    a=torch.tensor([encode(i,type='input')+[1001]*(self.maxlen-len(encode(i,type='input')))])
+    a=torch.tensor([encode(text=i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)+[1001]*(self.maxlen-len(encode(i,type='input',inputmerges=inputmerges,outputmerges=outputmerges)))])
     a=a.to(self.device)
     while ix[-1][-1]!=1002:
       ix_cond=ix[:,-self.block:]
