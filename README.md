@@ -62,11 +62,11 @@ After training, use `generator.py` to translate English sentences to French. Pro
 **Input:** "So I'll just share with you some stories very quickly of some magical things that have happened."
 **Output:** "Je vais donc partager avec vous très rapidement quelques histoires de choses magiques qui se sont produites."
 
-## TINKERING WITH CONFIGURATIONS
+### TINKERING WITH CONFIGURATIONS
 
 Feel free to explore and modify the configuration files `config.ini`  to adjust hyperparameters and experiment with different settings. The dataset (~844k sentences) is substantial, so be mindful of computational resources. Optimize batch sizes and iteration counts to balance training time and accuracy.
 
-##CONTRIBUTING
+###CONTRIBUTING
 We welcome contributions to this project! If you'd like to contribute, follow these steps:
 
 1. Fork the repository.
@@ -76,5 +76,5 @@ We welcome contributions to this project! If you'd like to contribute, follow th
 5. Push your changes to your forked repository.
 6. Create a pull request to the main repository.
 
-##LICENSE
+###LICENSE
 This project is licensed under the MIT License
